@@ -17,13 +17,18 @@ class CameraPage extends StatelessWidget {
           videoPathBuilder: () => _path(CaptureMode.video),
           initialCaptureMode: CaptureMode.photo,
         ),
-        filter: AwesomeFilter.AddictiveRed,
+        filter: AwesomeFilter.None,
         flashMode: FlashMode.auto,
         aspectRatio: CameraAspectRatios.ratio_16_9,
         previewFit: CameraPreviewFit.fitWidth,
         onMediaTap: (mediaCapture) {
           OpenFile.open(mediaCapture.filePath);
         },
+        imageAnalysisConfig: AnalysisConfig(
+          outputFormat: InputAnalysisImageFormat.jpeg, // choose between jpeg / nv21 / yuv_420 / bgra8888
+          width: 1024,
+          maxFramesPerSecond: 30,
+        ),
       ),
     );
   }
@@ -31,9 +36,9 @@ class CameraPage extends StatelessWidget {
   Future<String> _path(CaptureMode captureMode) async {
     final Directory extDir = await getTemporaryDirectory();
     final testDir =
-    await Directory('${extDir.path}/test').create(recursive: true);
+        await Directory('${extDir.path}/test').create(recursive: true);
     final String fileExtension =
-    captureMode == CaptureMode.photo ? 'jpg' : 'mp4';
+        captureMode == CaptureMode.photo ? 'jpg' : 'mp4';
     final String filePath =
         '${testDir.path}/${DateTime.now().millisecondsSinceEpoch}.$fileExtension';
     return filePath;
