@@ -2,7 +2,7 @@ import 'package:camera_120_fps/pages/use_camera.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
