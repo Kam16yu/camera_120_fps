@@ -1,4 +1,4 @@
-# camera_120_fps
+# camera_fast_fps
 
 A new Flutter project.
 
